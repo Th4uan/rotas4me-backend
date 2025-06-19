@@ -10,7 +10,7 @@ services:
     volumes:
       - ./data/postgres:/var/lib/postgresql/data
     networks:
-      - test_network
+      - hackaton_net
 
   app:
     build:
@@ -24,10 +24,10 @@ services:
     depends_on:
       - database
     networks:
-      - test_network
+      - hackaton_net
 
 volumes:
   data:
 networks:
-  test_network:
+  hackaton_net:
     driver: bridge
