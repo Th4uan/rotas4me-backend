@@ -18,6 +18,7 @@ async function bootstrap() {
   app.useGlobalFilters(new ErrorExceptionFilter());
 
   app.use(helmet());
+  app.enableCors();
 
   const config = new DocumentBuilder()
     .setTitle('Saas API')

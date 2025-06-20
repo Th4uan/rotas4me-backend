@@ -42,29 +42,19 @@ export class MapsController {
       MarkerType.SUSPECTED_DRUG_TRAFFICKING,
       MarkerType.HARASSMENT_REPORTS,
       MarkerType.UNSAFE_AREA,
-      MarkerType.ISOLATED_LOCATION,
       MarkerType.HIGH_CRIME_RATE,
       MarkerType.CATCALLING_ZONE,
       MarkerType.STALKING_REPORTS,
       MarkerType.UNSAFE_BUS_STOP,
       MarkerType.NIGHT_DANGER_ZONE,
       MarkerType.WEEKEND_RISK_AREA,
-      MarkerType.CONSTRUCTION_HAZARD,
-      MarkerType.BROKEN_INFRASTRUCTURE,
     ]);
 
     const safetyMarkers = await this.markerService.findByTypes([
       MarkerType.SAFE_SPOT,
-      MarkerType.POLICE_STATION,
       MarkerType.EMERGENCY_BUTTON,
-      MarkerType.WOMEN_SUPPORT_CENTER,
-      MarkerType.WELL_LIT_AREA,
       MarkerType.SECURITY_CAMERA,
-      MarkerType.WOMEN_ONLY_SPACE,
       MarkerType.TRUSTED_ESTABLISHMENT,
-      MarkerType.SAFE_TAXI_POINT,
-      MarkerType.BIKE_SHARING_SAFE,
-      MarkerType.METRO_SAFE_EXIT,
     ]);
 
     const route = await this.mapsService.getDirections(

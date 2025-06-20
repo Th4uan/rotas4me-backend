@@ -5,10 +5,14 @@ import { MarkerType } from '../../enums/marker.enum';
 
 export class GetMarkersByTypeDto {
   @ApiProperty({
-    description: 'Tipos de marcadores para filtrar',
+    description: 'Array de tipos de marcadores para filtrar',
     enum: MarkerType,
     isArray: true,
-    example: [MarkerType.SAFE_SPOT, MarkerType.POLICE_STATION],
+    example: [
+      MarkerType.SAFE_SPOT,
+      MarkerType.SECURITY_CAMERA,
+      MarkerType.EMERGENCY_BUTTON,
+    ],
   })
   @IsArray()
   @IsEnum(MarkerType, { each: true })
