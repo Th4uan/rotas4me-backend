@@ -39,7 +39,7 @@ import { MapsModule } from 'src/maps/maps.module';
           password: config.database.password,
           database: config.database.database,
           autoLoadEntities: config.database.autoLoadEntities,
-          synchronize: true, // desativar depois
+          synchronize: true,
           timezone: 'America/Sao_Paulo',
         };
       },

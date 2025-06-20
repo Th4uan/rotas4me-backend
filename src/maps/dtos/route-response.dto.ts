@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { MarkerResponseDto } from '../../marker/dto';
+import { MarkerResponseDto } from '../../marker/dto/response/marker-response.dto';
 
-// DTO para resposta de rota do Google Maps
 export class GoogleRouteDto {
   @ApiProperty({
     description: 'Array de rotas calculadas',
@@ -52,9 +51,30 @@ export class RouteResponseDto {
     type: [MarkerResponseDto],
   })
   safetyMarkers: MarkerResponseDto[];
+
+  @ApiProperty({
+    description: 'Marcadores perigosos que foram evitados na rota',
+    type: [MarkerResponseDto],
+    required: false,
+  })
+  dangerousMarkers?: MarkerResponseDto[];
+
+  @ApiProperty({
+    description: 'Informações de segurança da rota',
+    example: {
+      safetyScore: 75,
+      dangerousMarkersNearRoute: 2,
+      safetyMarkersNearRoute: 5,
+    },
+    required: false,
+  })
+  routeSafety?: {
+    safetyScore: number;
+    dangerousMarkersNearRoute: number;
+    safetyMarkersNearRoute: number;
+  };
 }
 
-// DTO para marcadores do Google Places
 export class GooglePlaceMarkerDto {
   @ApiProperty({
     description: 'ID único do lugar no Google Places',

@@ -15,6 +15,7 @@ import {
   MarkersByTypeResponseDto,
 } from './dtos';
 import { TravelMode } from '@googlemaps/google-maps-services-js';
+import { RouteSafetyUtil } from './utils/route-safety.util';
 
 @ApiTags('Maps')
 @Controller('maps')
@@ -25,7 +26,7 @@ export class MapsController {
   ) {}
 
   @Get('route')
-  @ApiOperation({ summary: 'Calcular rota com marcadores de segurança' })
+  @ApiOperation({ summary: 'Calcular rota evitando marcadores perigosos' })
   @ApiResponse({
     status: 200,
     description: 'Rota calculada com sucesso',
@@ -36,6 +37,22 @@ export class MapsController {
       ? query.waypoints.split(',')
       : undefined;
 
+    const dangerousMarkers = await this.markerService.findByTypes([
+      MarkerType.POOR_LIGHTING,
+      MarkerType.SUSPECTED_DRUG_TRAFFICKING,
+      MarkerType.HARASSMENT_REPORTS,
+      MarkerType.UNSAFE_AREA,
+      MarkerType.ISOLATED_LOCATION,
+      MarkerType.HIGH_CRIME_RATE,
+      MarkerType.CATCALLING_ZONE,
+      MarkerType.STALKING_REPORTS,
+      MarkerType.UNSAFE_BUS_STOP,
+      MarkerType.NIGHT_DANGER_ZONE,
+      MarkerType.WEEKEND_RISK_AREA,
+      MarkerType.CONSTRUCTION_HAZARD,
+      MarkerType.BROKEN_INFRASTRUCTURE,
+    ]);
+
     const safetyMarkers = await this.markerService.findByTypes([
       MarkerType.SAFE_SPOT,
       MarkerType.POLICE_STATION,
@@ -45,18 +62,45 @@ export class MapsController {
       MarkerType.SECURITY_CAMERA,
       MarkerType.WOMEN_ONLY_SPACE,
       MarkerType.TRUSTED_ESTABLISHMENT,
+      MarkerType.SAFE_TAXI_POINT,
+      MarkerType.BIKE_SHARING_SAFE,
+      MarkerType.METRO_SAFE_EXIT,
     ]);
 
     const route = await this.mapsService.getDirections(
       query.origin,
       query.destination,
       waypointArray,
-      query.mode as any,
+      query.mode as TravelMode,
+      dangerousMarkers,
+    );
+
+    const routePoints = RouteSafetyUtil.extractRoutePoints(route);
+    const dangerousMarkersNearRoute =
+      RouteSafetyUtil.filterDangerousMarkersNearRoute(
+        dangerousMarkers,
+        routePoints,
+        300,
+      );
+    const safetyScore = RouteSafetyUtil.calculateSafetyScore(
+      safetyMarkers,
+      dangerousMarkers,
+      routePoints,
     );
 
     return {
       route,
       safetyMarkers,
+      dangerousMarkers,
+      routeSafety: {
+        safetyScore,
+        dangerousMarkersNearRoute: dangerousMarkersNearRoute.length,
+        safetyMarkersNearRoute: RouteSafetyUtil.filterDangerousMarkersNearRoute(
+          safetyMarkers,
+          routePoints,
+          1000,
+        ).length,
+      },
     };
   }
 
@@ -70,23 +114,15 @@ export class MapsController {
   async getSafetyMarkersNearby(
     @Query(ValidationPipe) query: GetSafetyMarkersDto,
   ) {
-    const location = `${query.lat},${query.lng}`;
-
     const dbMarkers = await this.markerService.findNearby(
       query.lat,
       query.lng,
       query.radius || 1000,
     );
 
-    const googleMarkers = await this.mapsService.getMarkersNearby(
-      location,
-      query.radius || 1000,
-      'police',
-    );
-
     return {
       userMarkers: dbMarkers,
-      googleMarkers: googleMarkers.results,
+      googleMarkers: [],
     };
   }
 
@@ -129,7 +165,7 @@ export class MapsController {
     description: 'Endereço geocodificado',
   })
   async geocodeAddress(@Query(ValidationPipe) query: GeocodeDto) {
-    return await this.mapsService.geocodeAddress(query.address);
+    return await this.mapsService.geocode(query.address);
   }
 
   @Get('reverse-geocode')
