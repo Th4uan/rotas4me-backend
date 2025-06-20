@@ -1,5 +1,5 @@
 services:
-  database:
+  database_hackaton:
     image: postgres:17
     environment:
       POSTGRES_DB: teste
@@ -22,7 +22,7 @@ services:
     env_file:
       - ../env/.env
     depends_on:
-      - database
+      - database_hackaton
     networks:
       - hackaton_net
 
