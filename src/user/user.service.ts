@@ -1,15 +1,25 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from './entity/user.entity';
 import { CreateUserDto, UpdateUserDto, UserResponseDto } from './dto';
 import { UserMapper } from './mappers';
+import { SmsService } from '../sms/sms.service';
+import {
+  EmergencyNotificationData,
+  SmsResponse,
+} from '../sms/interfaces/twilio-config.interface';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
+    private readonly smsService: SmsService,
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<UserResponseDto> {
@@ -103,5 +113,34 @@ export class UserService {
 
   private deg2rad(deg: number): number {
     return deg * (Math.PI / 180);
+  }
+
+  async sendEmergencyAlert(
+    userId: string,
+    emergencyType?: string,
+    userLocation?: { lat: number; lng: number; address?: string },
+  ): Promise<SmsResponse[]> {
+    const user = await this.userRepository.findOne({ where: { id: userId } });
+    if (!user) {
+      throw new NotFoundException(`Usuário com ID ${userId} não encontrado`);
+    }
+
+    if (!user.contatosEmergencia || user.contatosEmergencia.length === 0) {
+      throw new BadRequestException(
+        'Usuário não possui contatos de emergência cadastrados',
+      );
+    }
+
+    const emergencyData: EmergencyNotificationData = {
+      userName: user.nome,
+      userLocation,
+      emergencyType,
+      timestamp: new Date(),
+    };
+
+    return this.smsService.sendEmergencyNotification(
+      user.contatosEmergencia,
+      emergencyData,
+    );
   }
 }

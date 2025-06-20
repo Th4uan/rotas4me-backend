@@ -18,4 +18,9 @@ export default registerAs('app', () => ({
   google: {
     apiKey: process.env.GOOGLE_API_KEY,
   },
+  twilio: {
+    accountSid: process.env.TWILIO_ACCOUNT_SID,
+    authToken: process.env.TWILIO_AUTH_TOKEN,
+    fromNumber: process.env.TWILIO_FROM_NUMBER,
+  },
 }));

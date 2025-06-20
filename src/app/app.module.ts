@@ -8,6 +8,7 @@ import appConfig from './configs/app.config';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { MarkerModule } from 'src/marker/marker.module';
 import { MapsModule } from 'src/maps/maps.module';
+import { SmsModule } from '../sms/sms.module';
 
 @Module({
   imports: [
@@ -39,7 +40,7 @@ import { MapsModule } from 'src/maps/maps.module';
           password: config.database.password,
           database: config.database.database,
           autoLoadEntities: config.database.autoLoadEntities,
-          synchronize: true,
+          synchronize: false,
           timezone: 'America/Sao_Paulo',
         };
       },
@@ -47,6 +48,7 @@ import { MapsModule } from 'src/maps/maps.module';
     UserModule,
     MarkerModule,
     MapsModule,
+    SmsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

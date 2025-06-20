@@ -20,7 +20,13 @@ import {
   ApiBody,
 } from '@nestjs/swagger';
 import { UserService } from './user.service';
-import { CreateUserDto, UpdateUserDto, UserResponseDto } from './dto';
+import {
+  CreateUserDto,
+  UpdateUserDto,
+  UserResponseDto,
+  SendEmergencyAlertDto,
+} from './dto';
+import { SmsResponse } from '../sms/interfaces/twilio-config.interface';
 
 @ApiTags('Usuários')
 @Controller('user')
@@ -174,5 +180,36 @@ export class UserController {
   @ApiResponse({ status: 404, description: 'Usuário não encontrado' })
   async remove(@Param('id', ParseUUIDPipe) id: string): Promise<void> {
     return this.userService.remove(id);
+  }
+
+  @Post(':id/emergency-alert')
+  @ApiOperation({
+    summary: 'Enviar alerta de emergência para contatos cadastrados',
+  })
+  @ApiParam({
+    name: 'id',
+    description: 'ID único do usuário',
+    example: '123e4567-e89b-12d3-a456-426614174000',
+  })
+  @ApiBody({ type: SendEmergencyAlertDto })
+  @ApiResponse({
+    status: 201,
+    description: 'Alertas de emergência enviados com sucesso',
+    type: [Object],
+  })
+  @ApiResponse({ status: 404, description: 'Usuário não encontrado' })
+  @ApiResponse({
+    status: 400,
+    description: 'Usuário não possui contatos de emergência',
+  })
+  async sendEmergencyAlert(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() sendEmergencyAlertDto: SendEmergencyAlertDto,
+  ): Promise<SmsResponse[]> {
+    return this.userService.sendEmergencyAlert(
+      id,
+      sendEmergencyAlertDto.emergencyType,
+      sendEmergencyAlertDto.userLocation,
+    );
   }
 }

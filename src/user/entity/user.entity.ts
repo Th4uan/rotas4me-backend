@@ -10,10 +10,10 @@ export class UserEntity extends BaseEntity {
   @Column({ type: 'varchar' })
   email: string;
 
-  @Column({ type: 'float', precision: 10, scale: 8, nullable: true })
+  @Column({ type: 'float', nullable: true })
   lat?: number;
 
-  @Column({ type: 'float', precision: 11, scale: 8, nullable: true })
+  @Column({ type: 'float', nullable: true })
   lng?: number;
 
   @Column({ nullable: true })

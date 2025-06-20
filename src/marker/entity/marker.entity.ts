@@ -10,7 +10,7 @@ export class MarkerEntity extends BaseEntity {
   @Column({ type: 'float' })
   longitude: number;
 
-  @Column({ enum: MarkerType })
+  @Column({ type: 'enum', enum: MarkerType })
   type: MarkerType;
 
   @Column({ type: 'varchar', nullable: true })
