@@ -12,3 +12,11 @@ export interface ExceptionResult {
   message?: string;
   data?: unknown;
 }
+
+export interface ErrorResponse {
+  timestamp: string;
+  path: string;
+  error: string;
+  statusCode: number;
+  message: string;
+}

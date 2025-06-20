@@ -1,13 +1,13 @@
-import { BaseEntity } from 'src/common/entity/base.entity';
 import { Column, Entity } from 'typeorm';
+import { BaseEntity } from '../../common/entity/base.entity';
 import { MarkerType } from '../enums/marker.enum';
 
 @Entity({ name: 'markers' })
 export class MarkerEntity extends BaseEntity {
-  @Column({ type: 'double' })
+  @Column({ type: 'float' })
   latitude: number;
 
-  @Column({ type: 'double' })
+  @Column({ type: 'float' })
   longitude: number;
 
   @Column({ enum: MarkerType })

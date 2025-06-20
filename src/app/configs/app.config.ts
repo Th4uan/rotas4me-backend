@@ -15,4 +15,7 @@ export default registerAs('app', () => ({
     limit: Number(process.env.THROTTLE_LIMIT) || 60,
     blockDuration: Number(process.env.THROTTLE_BLOCK_DURATION) || 5000,
   },
+  google: {
+    apiKey: process.env.GOOGLE_API_KEY,
+  },
 }));

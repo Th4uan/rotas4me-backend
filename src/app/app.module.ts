@@ -6,6 +6,8 @@ import { ConfigModule, ConfigType } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import appConfig from './configs/app.config';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { MarkerModule } from 'src/marker/marker.module';
+import { MapsModule } from 'src/maps/maps.module';
 
 @Module({
   imports: [
@@ -43,6 +45,8 @@ import { ThrottlerModule } from '@nestjs/throttler';
       },
     }),
     UserModule,
+    MarkerModule,
+    MapsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
