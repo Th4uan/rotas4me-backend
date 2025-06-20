@@ -1,5 +1,6 @@
-import { IsString, IsOptional } from 'class-validator';
+import { IsString, IsOptional, IsEnum } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { TravelMode } from '@googlemaps/google-maps-services-js';
 
 export class GetRouteDto {
   @ApiProperty({
@@ -30,6 +31,6 @@ export class GetRouteDto {
     default: 'walking',
   })
   @IsOptional()
-  @IsString()
-  mode?: string;
+  @IsEnum(TravelMode)
+  mode?: TravelMode;
 }

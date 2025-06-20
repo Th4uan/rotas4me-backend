@@ -1,5 +1,6 @@
-import { IsString, IsOptional } from 'class-validator';
+import { IsString, IsOptional, IsEnum } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { TravelMode } from '@googlemaps/google-maps-services-js';
 
 export class DistanceMatrixDto {
   @ApiProperty({
@@ -22,6 +23,6 @@ export class DistanceMatrixDto {
     default: 'driving',
   })
   @IsOptional()
-  @IsString()
-  mode?: string;
+  @IsEnum(TravelMode)
+  mode?: TravelMode;
 }
