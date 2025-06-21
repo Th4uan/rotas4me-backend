@@ -18,7 +18,12 @@ async function bootstrap() {
   app.useGlobalFilters(new ErrorExceptionFilter());
 
   app.use(helmet());
-  app.enableCors();
+  app.enableCors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: false,
+  });
 
   const config = new DocumentBuilder()
     .setTitle('Saas API')
