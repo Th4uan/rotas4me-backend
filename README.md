@@ -1,92 +1,127 @@
+# 🛡️ Rotas4Me
+
+<p align="center">
+  <img src="assets/images/image 75.png" alt="Rotas4Me Logo" width="200">
+</p>
+
 # 🗺️ Rotas4Me
 
 <p align="center">
-  <strong>Sistema inteligente de roteamento com análise de segurança</strong>
+  <strong>Sistema inteligente de roteamento com análise de segurança focado na proteção feminina</strong>
 </p>
 
 ## 🎯 Objetivo
 
-O **Rotas4Me** é uma aplicação desenvolvida especificamente para **proteção e segurança de mulheres**, oferecendo rotas seguras e inteligentes através da integração de dados de segurança urbana com o Google Maps API. O sistema foi criado para combater a violência contra a mulher, analisando marcadores de risco e segurança ao longo das rotas, priorizando caminhos mais seguros e bem iluminados para garantir que mulheres possam se deslocar com maior tranquilidade e proteção.
+O **Rotas4Me** é uma aplicação desenvolvida para promover a segurança de mulheres através de um sistema inteligente de cálculo de rotas. A plataforma analisa áreas de risco e sugere caminhos mais seguros, contribuindo para reduzir a vulnerabilidade feminina em espaços urbanos.
 
-## ✨ Funcionalidades
+## ✨ Funcionalidades Implementadas
 
-### 🛣️ **Cálculo de Rotas Inteligentes**
-- Integração completa com Google Maps Directions API
-- Suporte a múltiplos modos de transporte (caminhada, carro, bicicleta, transporte público)
-- Cálculo de rotas com waypoints personalizados
-- Geração automática de rotas alternativas quando detectados riscos
+### 🛣️ **Sistema de Rotas Inteligentes**
+- ✅ Integração completa com Google Maps Directions API
+- ✅ Suporte a múltiplos modos de transporte (caminhada, carro, bicicleta, transporte público)
+- ✅ Cálculo automático de rotas alternativas quando detectados marcadores perigosos
+- ✅ Geocodificação e geocodificação reversa
+- ✅ Matriz de distância entre múltiplos pontos
+- ✅ Waypoints personalizados
 
-### 🛡️ **Análise de Segurança Focada na Proteção Feminina**
-- Sistema de pontuação de segurança específico para mulheres
-- Detecção de áreas com histórico de violência contra mulheres
-- Identificação de locais seguros (delegacias da mulher, hospitais, centros de apoio)
-- Priorização de rotas bem iluminadas e com maior movimento de pessoas
-- Algoritmo inteligente para evitar áreas de risco conhecidas
-- Alertas em tempo real sobre zonas de perigo
+### 🛡️ **Análise de Segurança Avançada**
+- ✅ Sistema de pontuação de segurança (0-100)
+- ✅ **17 tipos de marcadores** categorizados:
+  - **Marcadores Perigosos**: `HIGH_CRIME_RATE`, `UNSAFE_AREA`, `POOR_LIGHTING`, `SUSPECTED_DRUG_TRAFFICKING`, `HARASSMENT_REPORTS`, `CATCALLING_ZONE`, `STALKING_REPORTS`, `UNSAFE_BUS_STOP`, `NIGHT_DANGER_ZONE`, `WEEKEND_RISK_AREA`
+  - **Marcadores Seguros**: `SAFE_SPOT`, `EMERGENCY_BUTTON`, `SECURITY_CAMERA`, `TRUSTED_ESTABLISHMENT`, `POLICE_STATION`, `HOSPITAL`, `WOMEN_SUPPORT_CENTER`
+- ✅ Detecção automática de marcadores próximos à rota (raio configurável: 300m para perigo, 1000m para segurança)
+- ✅ Algoritmo inteligente que evita áreas de risco mesmo com apenas 1 marcador perigoso
+- ✅ Cálculo de rotas alternativas baseado em análise de segurança
 
-### 📍 **Gerenciamento de Marcadores de Segurança Feminina**
-- CRUD completo de marcadores específicos para segurança da mulher
-- Categorização especializada (delegacias da mulher, centros de apoio, áreas de risco)
-- Mapeamento colaborativo de locais seguros e perigosos
-- Busca de marcadores por proximidade geográfica
-- Filtros por tipo e raio de distância
-- Sistema de denúncias anônimas de locais perigosos
+### 📍 **Gerenciamento Avançado de Marcadores**
+- ✅ CRUD completo de marcadores
+- ✅ Busca por tipo de marcador
+- ✅ Busca por proximidade geográfica
+- ✅ Filtros avançados por múltiplos tipos
+- ✅ Coordenadas geográficas precisas
 
 ### 🌍 **Serviços de Geolocalização**
-- Geocodificação de endereços
-- Geocodificação reversa (coordenadas para endereços)
-- Cálculo de matriz de distâncias
-- Busca de locais próximos
+- ✅ Busca de marcadores próximos por coordenadas
+- ✅ Cálculo de distâncias usando fórmula de Haversine
+- ✅ Conversão de endereços em coordenadas
+- ✅ Conversão de coordenadas em endereços
 
-### 👥 **Sistema de Usuários**
-- Autenticação e autorização
-- Perfis de usuário personalizados
-- Histórico de rotas calculadas
-- Rede de apoio e contatos de emergência
+### 👥 **Sistema Completo de Usuários**
+- ✅ CRUD completo de usuários
+- ✅ Busca por email e ID
+- ✅ Busca de usuários próximos por geolocalização
+- ✅ Perfis com informações de segurança
+- ✅ Configurações de privacidade (compartilhamento de localização)
+- ✅ Sistema de contatos de emergência
+- ✅ Configurações de notificações de segurança
 
-### 🚨 **Recursos de Emergência**
-- Botão de pânico integrado
-- Compartilhamento de localização em tempo real com contatos de confiança
-- Integração com números de emergência (190, 180)
-- Notificações automáticas para contatos em situações de risco
+### 🚨 **Sistema de Emergência via SMS**
+- ✅ Integração completa com Twilio
+- ✅ Envio de SMS simples
+- ✅ **Alertas de emergência automáticos** para contatos cadastrados
+- ✅ Notificações incluem localização e tipo de emergência
+- ✅ Verificação de configurações de segurança do usuário
+- ✅ Estatísticas de envio (sucessos/falhas)
+- ✅ Status do serviço SMS
 
-## 🌟 Impacto Social
+## 🏗️ Arquitetura e Tecnologias
 
-O **Rotas4Me** representa um compromisso com a **segurança e empoderamento feminino**, contribuindo para:
+### **Backend Robusto**
+- ✅ **NestJS** com TypeScript
+- ✅ **Clean Architecture** e princípios SOLID
+- ✅ **Injeção de Dependência** nativa
+- ✅ **Modularização** completa
 
-- **Redução da violência contra mulheres** através de rotas mais seguras
-- **Maior autonomia e liberdade de movimento** para mulheres em áreas urbanas
-- **Criação de uma rede colaborativa** de segurança feminina
-- **Conscientização sobre locais de risco** e recursos de apoio disponíveis
-- **Promoção de políticas públicas** baseadas em dados reais de segurança
+### **Banco de Dados**
+- ✅ **PostgreSQL** como banco principal
+- ✅ **TypeORM** para mapeamento objeto-relacional
+- ✅ Migrations e seeds automatizados
 
-## 🏗️ Arquitetura
+### **Integrações Externas**
+- ✅ **Google Maps Services** (Directions, Geocoding, Distance Matrix)
+- ✅ **Twilio** para SMS e notificações de emergência
 
-Aplicação construída com **NestJS** seguindo os princípios de:
-- **Clean Architecture**
-- **SOLID Principles**
-- **Dependency Injection**
-- **Modularização**
+### **Segurança e Monitoramento**
+- ✅ **Helmet** para headers de segurança
+- ✅ **Rate Limiting** com ThrottlerModule
+- ✅ **Validação** automática de dados com class-validator
+- ✅ **Filtros de exceção** personalizados
+- ✅ **CORS** configurado
+- ✅ **Logs** estruturados
 
-### 📦 Módulos Principais
-- **Maps Module**: Integração com Google Maps e cálculo de rotas
-- **Marker Module**: Gerenciamento de marcadores de segurança
-- **User Module**: Autenticação e gestão de usuários
-- **Common Module**: Utilitários e serviços compartilhados
+### **Documentação e API**
+- ✅ **Swagger/OpenAPI** completo
+- ✅ Documentação automática de endpoints
+- ✅ Exemplos de requisições e respostas
+- ✅ Validação de schemas
 
-## 🚀 Tecnologias
+### **Infraestrutura**
+- ✅ **Docker** e **Docker Compose**
+- ✅ Configuração de ambiente via variáveis
+- ✅ Scripts de desenvolvimento e produção
 
-- **Backend**: NestJS + TypeScript
-- **Banco de Dados**: PostgreSQL
-- **ORM**: TypeORM
-- **APIs Externas**: Google Maps Services
-- **Documentação**: Swagger/OpenAPI
-- **Containerização**: Docker
+## 🚀 Como Executar
 
-## Description
+### Pré-requisitos
+- Node.js 22+
+- Docker e Docker Compose
+- Conta Google Cloud (Google Maps API)
+- Conta Twilio (SMS)
 
-Sistema de roteamento inteligente desenvolvido com [NestJS](https://github.com/nestjs/nest) framework.
+### Instalação
 
-## License
+```bash
+# Clonar o repositório
+git clone <repository-url>
+cd rotas4me
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+# Instalar dependências
+npm install
+
+# Configurar variáveis de ambiente
+cp .env.example .env
+# Editar .env com suas credenciais
+
+# Entrar na pasta docker subir o conteiner
+cd docker && docker compose up 
+```
