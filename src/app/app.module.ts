@@ -40,7 +40,7 @@ import { SmsModule } from '../sms/sms.module';
           password: config.database.password,
           database: config.database.database,
           autoLoadEntities: config.database.autoLoadEntities,
-          synchronize: false,
+          synchronize: true,
           timezone: 'America/Sao_Paulo',
         };
       },
