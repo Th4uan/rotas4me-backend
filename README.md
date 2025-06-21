@@ -112,7 +112,7 @@ O **Rotas4Me** é uma aplicação desenvolvida para promover a segurança de mul
 
 ```bash
 # Clonar o repositório
-git clone <repository-url>
+git clone <https://github.com/Th4uan/rotas4me-backend>
 cd rotas4me
 
 # Instalar dependências
