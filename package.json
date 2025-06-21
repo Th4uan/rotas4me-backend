@@ -2,9 +2,12 @@
   "name": "rotas4me",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Th4uan",
   "private": true,
   "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
