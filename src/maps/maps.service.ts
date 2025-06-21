@@ -89,7 +89,7 @@ export class MapsService {
           `Rota calculada. ${dangerousMarkersNearRoute.length} marcadores perigosos encontrados próximos à rota de ${dangerousMarkers.length} total.`,
         );
 
-        if (dangerousMarkersNearRoute.length > 2) {
+        if (dangerousMarkersNearRoute.length > 0) {
           console.log(
             'Tentando calcular rota alternativa para evitar marcadores perigosos...',
           );
